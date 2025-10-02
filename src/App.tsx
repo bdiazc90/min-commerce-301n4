@@ -4,6 +4,8 @@ import { HomePage } from "@/pages/HomePage";
 import { CartPage } from "@/pages/CartPage";
 import { CheckoutPage } from "@/pages/CheckoutPage";
 
+import { CartProvider } from "@/contexts/CartContext";
+
 function Layout() {
 
   const navigationLinks = [
@@ -16,21 +18,20 @@ function Layout() {
 
   return (
     <>
-      <header>
-        <nav>
-          <ul className="flex list-none gap-4 justify-end h-20vh pt-10 pe-4">
+      <header className="w-full h-[6vh] pt-6">
+        <nav className="">
+          <ul className="flex list-none gap-3 justify-end h-full">
             {navigationLinks.map((navLink, index) =>
               <li key={index}>
-                <Link to={navLink.path} className="px-10 py-4 text-xl font-semibold text-center 
-text-white transition duration-300 rounded-lg hover:from-purple-600 
-hover:to-pink-600 ease bg-gradient-to-br from-purple-500 to-pink-500 
-md:w-auto">{navLink.label}</Link>
+                <Link to={navLink.path} className="inline-block px-8 py-3 text-base font-semibold text-cyan-600 transition duration-300 rounded-lg hover:bg-cyan-50 hover:text-cyan-700 border border-cyan-200 hover:border-cyan-300">
+                  {navLink.label}
+                </Link>
               </li>
             )}
           </ul>
         </nav>
       </header>
-      <main className='w-full h-[80vh] flex justify-center items-center'>
+      <main className='w-full min-h-[94vh] flex justify-center items-start pt-8 overflow-auto'>
         <Outlet />
       </main>
     </>
@@ -59,7 +60,7 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return <CartProvider><RouterProvider router={router} /></CartProvider>;
 }
 
 export default App
